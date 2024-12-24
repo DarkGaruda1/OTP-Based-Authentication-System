@@ -42,7 +42,7 @@ export const sendPasswordResetOTP = async (req, res) => {
       text: ` Hello ${username}, Use this OTP is ${otp} for resetting your password. This OTP is valid for 15 minutes from now.  `,
     };
 
-    transporter.sendMail(mailOptions);
+    // transporter.sendMail(mailOptions);
 
     return res
       .status(201)

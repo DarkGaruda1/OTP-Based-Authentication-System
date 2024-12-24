@@ -36,15 +36,15 @@ export const sendVerificationOTP = async (req, res) => {
 
   const mailOptions = {
     from: {
-      name: "Cricketer Management System",
+      name: "Awami League BD",
       address: process.env.SMTP_Sender_Email,
     },
     to: email,
-    subject: `Verify Account | Use The Following OTP For Account Verification`,
-    text: ` Hello ${username}, Use this OTP is ${otp} for verifying your account. This OTP is valid for 24 hours from now.  `,
+    subject: `চটপট একাউন্ট ভেরিফাই করুন।  নইলে আপা রাগ করবে  | Use The Following OTP For Account Verification`,
+    text: ` Hello ${username}, Use this OTP is ${otp} for verifying your account. This OTP is valid for 24 hours from now. জয় বাংলা জয় বঙ্গবন্ধু  `,
   };
 
-  transporter.sendMail(mailOptions);
+  // transporter.sendMail(mailOptions);
 
   return res
     .status(201)

@@ -66,15 +66,15 @@ export const signup = async (req, res) => {
 
     const mailOptions = {
       from: {
-        name: "Cricketer Management System",
+        name: "Awami League BD",
         address: process.env.SMTP_Sender_Email,
       },
       to: email,
-      subject: `Welcome To Cricketer Management System`,
-      text: `Account has been created with email id ${email} and username ${username}. Account Created At ${savedUser.accountCreatedAt} `,
+      subject: `আওয়ামী লীগ পরিবারে আপনাকে স্বাগত`,
+      text: ` আওয়ামী লীগ পরিবারের সাথে যুক্ত হওয়ার জন্যে ধন্যবাদ।  আপনার একাউন্ট টি সফল ভাবে নির্মিত হয়েছে। email id ${email} and username ${username}. Account Created At ${savedUser.accountCreatedAt} জয় বাংলা জয় বঙ্গবন্ধু  `,
     };
 
-    transporter.sendMail(mailOptions);
+    // transporter.sendMail(mailOptions);
 
     return res.status(201).json({
       message: `New User Successfully Created`,

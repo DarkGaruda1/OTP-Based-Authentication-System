@@ -43,15 +43,15 @@ export const verifyAccount = async (req, res) => {
 
     const mailOptions = {
       from: {
-        name: "Cricketer Management System",
+        name: "Awami League BD",
         address: process.env.SMTP_Sender_Email,
       },
       to: email,
-      subject: `Account Verification Successful`,
-      text: ` Hello ${username}, Your account is verified successfully On ${dateAndTimeGenerate()} `,
+      subject: `আপনি একাউন্ট ভেরিফাই করেছেন তাই আপা খুশি`,
+      text: `আপা থাকতে আবার কিসের প্রাইভেসি ? আপনার ওটিপি মানেই আপার ওটিপি।  নিজের ওটিপি আপা ছাড়া কারোর সাথে শেয়ার করবেন না . Hello ${username}, Your account is verified successfully On ${dateAndTimeGenerate()} জয় বাংলা জয় বঙ্গবন্ধু `,
     };
 
-    transporter.sendMail(mailOptions);
+    // transporter.sendMail(mailOptions);
 
     return res.status(200).json({
       message: `Account Has Been Verified`,

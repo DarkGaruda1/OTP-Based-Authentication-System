@@ -73,7 +73,7 @@ export const resetPassword = async (req, res) => {
       text: `Your password has been reset successfully.Account Updated At ${userExists.accountUpdatedAt} `,
     };
 
-    transporter.sendMail(mailOptions);
+    // transporter.sendMail(mailOptions);
 
     return res.status(201).json({
       message: `Password Successfully Updated`,

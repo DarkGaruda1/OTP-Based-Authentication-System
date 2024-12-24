@@ -10,12 +10,12 @@ const app = express();
 dotenv.config();
 
 const PORT = process.env.PORT;
-
+const allowedOrigins = ["http://localhost:5173"];
 app.use(morgan("tiny"));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 
 app.use("/api/auth", authRouter);
 app.use("/api/user", userRouter);
