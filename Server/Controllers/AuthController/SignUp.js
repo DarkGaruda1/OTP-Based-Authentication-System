@@ -1,3 +1,4 @@
+import { WELCOME_EMAIL_TEMPLATE } from "../../Config/WelcomeTemplate1.js";
 import transporter from "../../Config/Nodemailer.js";
 
 import User from "../../Model/UserModel.js";
@@ -5,6 +6,7 @@ import { validateEmail } from "../../Validations/ValidateEmail.js";
 import { validatePassword } from "../../Validations/ValidatePassword.js";
 import { validateUsername } from "../../Validations/ValidateUserName.js";
 import bcrypt from "bcrypt";
+import { WELCOME_EMAIL_TEMPLATE_2 } from "../../Config/WelcomeTemplate2.js";
 
 export const signup = async (req, res) => {
   const { name, email, password, username } = req.body;
@@ -70,11 +72,11 @@ export const signup = async (req, res) => {
         address: process.env.SMTP_Sender_Email,
       },
       to: email,
-      subject: `আওয়ামী লীগ পরিবারে আপনাকে স্বাগত`,
-      text: ` আওয়ামী লীগ পরিবারের সাথে যুক্ত হওয়ার জন্যে ধন্যবাদ।  আপনার একাউন্ট টি সফল ভাবে নির্মিত হয়েছে। email id ${email} and username ${username}. Account Created At ${savedUser.accountCreatedAt} জয় বাংলা জয় বঙ্গবন্ধু  `,
+      subject: `জলদি জলদি লগ ইন করে একাউন্ট ভেরিফাই করে নাও।  নইলে আপা খেপে যাবেন `,
+      html: WELCOME_EMAIL_TEMPLATE_2.replace("{{Name}}", name.split(" ")[0]),
     };
 
-    // transporter.sendMail(mailOptions);
+    transporter.sendMail(mailOptions);
 
     return res.status(201).json({
       message: `New User Successfully Created`,

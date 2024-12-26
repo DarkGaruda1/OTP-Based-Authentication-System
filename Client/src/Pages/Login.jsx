@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../Context/AppContext";
@@ -33,9 +33,8 @@ const Login = () => {
         console.log(data);
 
         if (data.success == true) {
-          setIsLoggedIn(true);
-          getUserData();
-          navigate("/");
+          toast.success(data.message);
+          setState("login");
         } else {
           toast.error(data.message);
         }
@@ -62,6 +61,7 @@ const Login = () => {
       toast.error(error.response.data.message);
     }
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen p-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
       <img

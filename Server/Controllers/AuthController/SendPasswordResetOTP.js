@@ -2,6 +2,7 @@ import transporter from "../../Config/Nodemailer.js";
 import User from "../../Model/UserModel.js";
 
 export const sendPasswordResetOTP = async (req, res) => {
+  console.log(`Request Recieved`);
   const { email } = req.body;
 
   console.log(email);

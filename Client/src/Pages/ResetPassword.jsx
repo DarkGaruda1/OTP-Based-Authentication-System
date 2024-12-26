@@ -36,27 +36,30 @@ const ResetPassword = () => {
       }
     });
   };
-  const onSubmitHandler = async (event) => {
-    event.preventDefault();
 
-    const otpArray = inputRefs.current.map((event) => event.value);
-    const otp = otpArray.join("");
+  const onSubmitNewPassword = async (event) => {
+    event.preventDefault();
 
     try {
       const { data } = await axios.post(
-        backendURL + "/api/auth/verifyAccount",
-        { otp }
+        backendURL + "/api/auth/resetPassword",
+        { email, otp: OTP, newPassword }
       );
 
-      if (data.success) {
-        toast.success(data.message);
-        getUserData();
-        navigate("/");
-      } else toast.error(data.message);
+      data.success ? toast.success(data.message) : toast.error(data.message);
+      data.success && navigate("/login");
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
     }
+  };
+  const onSubmitOTP = async (event) => {
+    event.preventDefault();
+
+    const otpArray = inputRefs.current.map((event) => event.value);
+    setOTP(otpArray.join(""));
+
+    setIsOTPSubmitted(true);
   };
 
   const onSubmitEmail = async (event) => {
@@ -64,7 +67,7 @@ const ResetPassword = () => {
 
     try {
       const { data } = await axios.post(
-        backendURL + "/auth/api/sendPasswordResetOTP",
+        backendURL + "/api/auth/sendPasswordResetOTP",
         { email }
       );
 
@@ -85,7 +88,10 @@ const ResetPassword = () => {
       />
 
       {!isEmailSent && (
-        <form className="bg-slate-900 rounded-lg p-8 shadow-lg w-96 text-sm">
+        <form
+          className="bg-slate-900 rounded-lg p-8 shadow-lg w-96 text-sm"
+          onSubmit={onSubmitEmail}
+        >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             Reset Password
           </h1>
@@ -114,7 +120,7 @@ const ResetPassword = () => {
       {!isOTPSubmitted && isEmailSent && (
         <form
           className="bg-slate-900 rounded-lg p-8 shadow-lg w-96 text-sm"
-          onSubmit={onSubmitEmail}
+          onSubmit={onSubmitOTP}
         >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             Reset Password OTP
@@ -145,13 +151,18 @@ const ResetPassword = () => {
         </form>
       )}
 
+      {/* New Password */}
+
       {isOTPSubmitted && isEmailSent && (
-        <form className="bg-slate-900 rounded-lg p-8 shadow-lg w-96 text-sm">
+        <form
+          className="bg-slate-900 rounded-lg p-8 shadow-lg w-96 text-sm"
+          onSubmit={onSubmitNewPassword}
+        >
           <h1 className="text-white text-2xl font-semibold text-center mb-4">
             Reset Password
           </h1>
           <p className="text-center mb-6 text-indigo-300">
-            Enter Your Registered Email ID
+            Enter Your Password
           </p>
 
           <div className="mb-4 flex items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
